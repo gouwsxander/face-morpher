@@ -1,2 +1,2 @@
 # face-morpher
- Morphs pictures of faces
+Morphs pictures of faces
