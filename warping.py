@@ -36,13 +36,13 @@ class Region:
             other: Region or tuple(int, int) that is being checked.
         """
         if isinstance(other, Region):
-            is_horizontally_contained = self.left < other.left and self.right > other.right
-            is_vertically_contained = self.top < other.top and self.bottom > other.bottom
+            is_horizontally_contained = self.left <= other.left and self.right >= other.right
+            is_vertically_contained = self.top <= other.top and self.bottom >= other.bottom
             return is_vertically_contained and is_horizontally_contained
         
         elif isinstance(other, tuple(int, int)):
-            is_horizontally_contained = self.left < other[0] < self.right
-            is_vertically_contained = self.top < other[1] < self.bottom
+            is_horizontally_contained = self.left <= other[0] <= self.right
+            is_vertically_contained = self.top <= other[1] <= self.bottom
             return is_vertically_contained and is_horizontally_contained
         
         else:
@@ -65,9 +65,6 @@ class Warp:
     source: Region
     target: Region
     bounding: Region
-
-    def _check_validity(self):
-        return 
     
     def __post_init__(self):
         if not self.bounding.contains(self.source) or not self.bounding.contains(self.target):

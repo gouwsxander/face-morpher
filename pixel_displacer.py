@@ -8,13 +8,10 @@ from scipy.ndimage import map_coordinates
 import warping
 
 def _check_warps_intersect(warps: list[warping.Warp]) -> bool:
-    """Checks if two ore more warps in a list of warps have intersecting areas of effect.
+    """Returns True iff two or more warps in a list have intersecting bounds.
 
     Args:
         warps: List of warps to check.
-
-    Returns:
-        A boolean that is true only when there are intersecting warps.
     """
     for warp_1 in warps:
         for warp_2 in warps:
@@ -35,12 +32,14 @@ def warp_image(image: np.ndarray, warp: warping.Warp) -> np.ndarray:
     """
     ...
 
-def multi_warp_iamge(image: np.ndarray, warps: list[warping.Warp]) -> np.ndarray:
-    """Applies multiple warps to an image. Provides a warning of those warps intersect.
+def multi_warp_image(image: np.ndarray, warps: list[warping.Warp]) -> np.ndarray:
+    """Applies multiple warps to an image.
+    
+    Provides a warning of those warps intersect.
     
     Args:
         image: Array of pixel values that is to be warpped.
-        warps: A list of warps to be applied.
+        warps: List of warps to be applied.
 
     Returns:
         The warpped image.
